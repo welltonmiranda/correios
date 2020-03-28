@@ -6,7 +6,7 @@ class Correios extends Http {
 
 	function __construct() {
 		$this->url = [
-			'calcularPrecoPrazo' => 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo',
+				'calcularPrecoPrazo' => 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo',
 		];
 	}
 
