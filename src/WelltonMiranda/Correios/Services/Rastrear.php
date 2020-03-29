@@ -221,7 +221,23 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function fetchRastrear() {
 
-	
-		return $this->rastreamento;
+		$rastreios = $this->rastreamento;
+
+		$resultado = [];
+
+		foreach ($rastreios as $key => $rastreio):
+
+			$resultado[] = [
+
+				'data' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['data']))),
+				'local' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['local']))),
+				'status' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['status']))),
+				'encaminhado' => (isset($rastreio['encaminhado']) ? preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['encaminhado']))) : null),
+
+			];
+
+		endforeach;
+
+		return $resultado;
 	}
 }
