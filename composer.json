@@ -18,7 +18,7 @@
             "WelltonMiranda\\Correios\\": "src/"
         },
         "files": [
-             "src/Helpers.php"
+            "src/WelltonMiranda/Correios/Helpers.php"
         ]
     },
     "minimum-stability": "dev",
