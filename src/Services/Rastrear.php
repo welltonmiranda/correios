@@ -4,8 +4,8 @@ namespace WelltonMiranda\Correios\Services;
 
 use GuzzleHttp\ClientInterface;
 use PhpQuery\PhpQuery as phpQuery;
-use Contracts\RastrearInterface;
-use WebService;
+use WelltonMiranda\Correios\Contracts\RastrearInterface;
+use WelltonMiranda\Correios\WebService;
 
 class Rastrear implements RastrearInterface {
 

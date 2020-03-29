@@ -4,11 +4,11 @@ namespace WelltonMiranda\Correios;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\ClientInterface;
-use Contracts\CepInterface;
-use Contracts\FreteInterface;
-use Services\Cep;
-use Services\Frete;
-use Services\Rastrear;
+use WelltonMiranda\Correios\Contracts\CepInterface;
+use WelltonMiranda\Correios\Contracts\FreteInterface;
+use WelltonMiranda\Correios\Services\Cep;
+use WelltonMiranda\Correios\Services\Frete;
+use WelltonMiranda\Correios\Services\Rastrear;
 
 class Client {
 

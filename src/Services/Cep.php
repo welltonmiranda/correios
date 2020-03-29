@@ -3,8 +3,8 @@
 namespace WelltonMiranda\Correios\Services;
 
 use GuzzleHttp\ClientInterface;
-use Contracts\CepInterface;
-use WebService;
+use WelltonMiranda\Correios\Contracts\CepInterface;
+use WelltonMiranda\Correios\WebService;
 
 class Cep implements CepInterface {
 
