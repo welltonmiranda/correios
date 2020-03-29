@@ -91,7 +91,9 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function buildFormBody() {
 		$codigo = preg_replace('/[^0-9]/', null, $this->codigo);
-		$this->body = ['Objetos' => $codigo];
+		$this->body = [
+			'Objetos' => $codigo,
+		];
 
 		return $this;
 	}
@@ -220,11 +222,6 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function fetchRastrear() {
 
-<<<<<<< Updated upstream
-		$address = $this->parsedXML['consultaCEPResponse']['return'];
-		$cep = preg_replace('/^([0-9]{5})([0-9]{3})$/', '${1}-${2}', $address['cep']);
-		$complement = $this->getComplement($address);
-=======
 		$rastreios = $this->rastreamento;
 
 		$resultado = [];
@@ -242,15 +239,9 @@ class Rastrear implements RastrearInterface {
 				'local' => cleanString($rastreio['local']),
 				'status' => cleanString($rastreio['status']),
 				'encaminhado' => (isset($rastreio['encaminhado']) ? cleanString($rastreio['encaminhado']) : null),
->>>>>>> Stashed changes
 
-		return [
-			'data' => $this,
-			'rua' => $address['end'],
-			'complemento' => $complement,
-			'bairro' => $address['bairro'],
-			'cidade' => $address['cidade'],
-			'uf' => $address['uf'],
-		];
+			];
+		endforeach;
+
 	}
 }
