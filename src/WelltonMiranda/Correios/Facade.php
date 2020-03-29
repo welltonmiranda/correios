@@ -30,7 +30,7 @@ class Facade extends \Illuminate\Support\Facades\Facade {
 
 	protected static function getFacadeAccessor() {
 
-		return 'Correios';
+		return Client::class;
 
 	}
 

@@ -195,9 +195,7 @@ class Cep implements CepInterface {
 			$complement[] = $address['complemento2'];
 		}
 
-		//$string = implode(',', $complement);
-
-		return '1';//$address['complemento2'];
+		return implode(',', $complement);
 	}
 
 	/**
@@ -212,10 +210,10 @@ class Cep implements CepInterface {
 
 		return [
 			'cep' => $cep,
-			'rua' => $address['end'],
+			'rua' => cleanString($address['end']),
 			'complemento' => cleanString($complement),
-			'bairro' => $address['bairro'],
-			'cidade' => $address['cidade'],
+			'bairro' => cleanString($address['bairro']),
+			'cidade' => cleanString($address['cidade']),
 			'uf' => $address['uf'],
 		];
 	}

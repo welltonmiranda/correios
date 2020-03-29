@@ -67,7 +67,7 @@ class Client {
 	 */
 	public function cep() {
 		return $this->cep;
-	}	
+	}
 
 	/**
 	 * Serviço de Rastreio dos Correios.
