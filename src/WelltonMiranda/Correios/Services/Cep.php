@@ -174,6 +174,7 @@ class Cep implements CepInterface {
 	protected function messages($faultString) {
 		return [
 			'CEP INVÁLIDO' => 'CEP não encontrado',
+			'CEP NAO ENCONTRADO' => 'CEP não encontrado',
 		][$faultString];
 	}
 
