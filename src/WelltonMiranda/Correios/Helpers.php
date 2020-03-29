@@ -9,7 +9,7 @@ if (!function_exists('cleanString')) {
 	 * @return string
 	 */
 
-	function cleanString($string) {
+	function cleanString(string $string) {
 
 		$string = htmlentities($string, null, 'utf-8');
 

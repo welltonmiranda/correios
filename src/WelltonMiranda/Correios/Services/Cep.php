@@ -188,14 +188,16 @@ class Cep implements CepInterface {
 		$complement = [];
 
 		if (array_key_exists('complemento', $address)) {
-			$complement[] = cleanString($address['complemento']);
+			$complement[] = $address['complemento'];
 		}
 
 		if (array_key_exists('complemento2', $address)) {
-			$complement[] = cleanString($address['complemento2']);
+			$complement[] = $address['complemento2'];
 		}
 
-		return $complement;
+		//$string = implode(',', $complement);
+
+		return '1';//$address['complemento2'];
 	}
 
 	/**
@@ -210,11 +212,11 @@ class Cep implements CepInterface {
 
 		return [
 			'cep' => $cep,
-			'rua' => cleanString($address['end']),
-			'complemento' => $complement,
-			'bairro' => cleanString($address['bairro']),
-			'cidade' => cleanString($address['cidade']),
-			'uf' => cleanString($address['uf']),
+			'rua' => $address['end'],
+			'complemento' => cleanString($complement),
+			'bairro' => $address['bairro'],
+			'cidade' => $address['cidade'],
+			'uf' => $address['uf'],
 		];
 	}
 }
