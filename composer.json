@@ -1,5 +1,5 @@
 {
-    "name": "welltonmiranda/correios-ferramentas",
+    "name": "welltonmiranda/correios",
     "description": "Package para pesquisa de serviços de busca por cep, cálculo de frete e etc, diretamente nos serviços dos Correios.",
     "keywords": ["cep", "brazil", "laravel", "frete"],
     "license": "MIT",
@@ -14,17 +14,17 @@
     },
     "autoload": {
         "psr-0": {
-            "WelltonMiranda\\CorreiosFerramentas": "src/"
+            "WelltonMiranda\\Correios": "src/"
         }
     },
     "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
-                "WelltonMiranda\\CorreiosFerramentas\\ServiceProvider"
+                "WelltonMiranda\\Correios\\ServiceProvider"
             ],
             "aliases": {
-                "Correios": "WelltonMiranda\\CorreiosFerramentas\\Facade"
+                "Correios": "WelltonMiranda\\Correios\\Facade"
             }
         }
     }

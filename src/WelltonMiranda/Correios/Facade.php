@@ -1,6 +1,6 @@
 <?php
 
-namespace WelltonMiranda\CorreiosFerramentas;
+namespace WelltonMiranda\Correios;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 
@@ -14,7 +14,7 @@ class Facade extends BaseFacade {
 
 	protected static function getFacadeAccessor() {
 
-		return 'correios_ferramentas';
+		return 'correios';
 
 	}
 

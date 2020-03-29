@@ -1,6 +1,6 @@
 <?php
 
-namespace WelltonMiranda\CorreiosFerramentas;
+namespace WelltonMiranda\Correios;
 
 class CorreiosFerramentas extends Http {
 

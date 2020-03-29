@@ -1,6 +1,6 @@
 <?php
 
-namespace WelltonMiranda\CorreiosFerramentas;
+namespace WelltonMiranda\Correios;
 
 use GuzzleHttp\Exception\RequestException;
 
