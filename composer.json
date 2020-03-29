@@ -21,10 +21,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "WelltonMiranda\\CorreiosConsulta\\ServiceProvider"
+                "WelltonMiranda\\CorreiosFerramentas\\ServiceProvider"
             ],
             "aliases": {
-                "Correios": "WelltonMiranda\\CorreiosConsulta\\Facade"
+                "Correios": "WelltonMiranda\\CorreiosFerramentas\\Facade"
             }
         }
     }
