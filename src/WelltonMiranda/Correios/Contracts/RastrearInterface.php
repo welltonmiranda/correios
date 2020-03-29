@@ -3,6 +3,7 @@
 namespace WelltonMiranda\Correios\Contracts;
 
 interface RastrearInterface {
+	
 	/**
 	 * Encontrar endereço por CEP.
 	 *
@@ -10,6 +11,7 @@ interface RastrearInterface {
 	 *
 	 * @return array
 	 */
+
 	public function find($codigo);
 
 }

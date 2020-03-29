@@ -3,6 +3,7 @@
 namespace WelltonMiranda\Correios\Contracts;
 
 interface CepInterface {
+	
 	/**
 	 * Encontrar endereço por CEP.
 	 *
@@ -10,6 +11,7 @@ interface CepInterface {
 	 *
 	 * @return array
 	 */
+
 	public function find($cep);
 
 }

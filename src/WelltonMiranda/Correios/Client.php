@@ -11,6 +11,7 @@ use WelltonMiranda\Correios\Services\Frete;
 use WelltonMiranda\Correios\Services\Rastrear;
 
 class Client {
+	
 	/**
 	 * Serviço de frete.
 	 *

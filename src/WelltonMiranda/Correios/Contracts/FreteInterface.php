@@ -3,6 +3,7 @@
 namespace WelltonMiranda\Correios\Contracts;
 
 interface FreteInterface {
+
 	/**
 	 * Payload da requisição para o webservice dos Correios.
 	 *
@@ -10,6 +11,7 @@ interface FreteInterface {
 	 *
 	 * @return array
 	 */
+
 	public function payload($service);
 
 	/**
@@ -19,6 +21,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function origin($cep);
 
 	/**
@@ -28,6 +31,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function destination($cep);
 
 	/**
@@ -37,6 +41,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function services(...$services);
 
 	/**
@@ -51,6 +56,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function credentials($code, $password);
 
 	/**
@@ -60,6 +66,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function package($format);
 
 	/**
@@ -69,6 +76,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function useOwnHand($useOwnHand);
 
 	/**
@@ -79,6 +87,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function declaredValue($value);
 
 	/**
@@ -92,6 +101,7 @@ interface FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function item($width, $height, $length, $weight, $quantity = 1);
 
 	/**
@@ -99,6 +109,7 @@ interface FreteInterface {
 	 *
 	 * @return array
 	 */
+	
 	public function calculate();
 
 }

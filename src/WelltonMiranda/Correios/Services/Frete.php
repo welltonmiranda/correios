@@ -11,11 +11,13 @@ use WelltonMiranda\Correios\Service;
 use WelltonMiranda\Correios\WebService;
 
 class Frete implements FreteInterface {
+
 	/**
 	 * Serviços do Correios (Sedex, PAC...).
 	 *
 	 * @var array
 	 */
+
 	protected $services = [];
 
 	/**
@@ -23,6 +25,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @var array
 	 */
+
 	protected $defaultPayload = [
 		'nCdEmpresa' => '',
 		'sDsSenha' => '',
@@ -45,6 +48,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @var array
 	 */
+
 	protected $payload = [];
 
 	/**
@@ -52,6 +56,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @var array
 	 */
+
 	protected $items = [];
 
 	/**
@@ -59,6 +64,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @var \GuzzleHttp\ClientInterface
 	 */
+
 	protected $http;
 
 	/**
@@ -66,6 +72,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @param \GuzzleHttp\ClientInterface $http
 	 */
+
 	public function __construct(ClientInterface $http) {
 		$this->http = $http;
 	}
@@ -77,6 +84,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return array
 	 */
+
 	public function payload($service) {
 		$this->payload['nCdServico'] = $service;
 
@@ -98,6 +106,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function origin($cep) {
 		$this->payload['sCepOrigem'] = preg_replace('/[^0-9]/', null, $cep);
 
@@ -111,6 +120,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function destination($cep) {
 		$this->payload['sCepDestino'] = preg_replace('/[^0-9]/', null, $cep);
 
@@ -124,6 +134,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function services(...$services) {
 		$this->services = array_unique($services);
 
@@ -142,6 +153,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function credentials($code, $password) {
 		$this->payload['nCdEmpresa'] = $code;
 		$this->payload['sDsSenha'] = $password;
@@ -156,6 +168,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function package($format) {
 		$this->payload['nCdFormato'] = $format;
 
@@ -169,6 +182,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function useOwnHand($useOwnHand) {
 		$this->payload['sCdMaoPropria'] = (bool) $useOwnHand ? 'S' : 'N';
 
@@ -183,6 +197,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function declaredValue($value) {
 		$this->payload['nVlValorDeclarado'] = floatval($value);
 
@@ -200,6 +215,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return self
 	 */
+
 	public function item($width, $height, $length, $weight, $quantity = 1) {
 		$this->items[] = compact('width', 'height', 'length', 'weight', 'quantity');
 
@@ -211,6 +227,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return array
 	 */
+
 	public function calculate() {
 		$servicesResponses = array_map(function ($service) {
 			return $this->http->get(WebService::CALC_PRICE_DEADLINE, [
@@ -228,6 +245,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function width() {
 		return max(array_map(function ($item) {
 			return $item['width'];
@@ -239,6 +257,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function height() {
 		return array_sum(array_map(function ($item) {
 			return $item['height'] * $item['quantity'];
@@ -250,6 +269,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function length() {
 		return max(array_map(function ($item) {
 			return $item['length'];
@@ -261,6 +281,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function weight() {
 		return array_sum(array_map(function ($item) {
 			return $item['weight'] * $item['quantity'];
@@ -272,6 +293,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function volume() {
 		return ($this->length() * $this->width() * $this->height()) / 6000;
 	}
@@ -282,6 +304,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return int|float
 	 */
+
 	protected function useWeightOrVolume() {
 		if ($this->volume() < 10 || $this->volume() <= $this->weight()) {
 			return $this->weight();
@@ -296,6 +319,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return array
 	 */
+
 	protected function fetchCorreiosService(Response $response) {
 		$xml = simplexml_load_string($response->getBody()->getContents());
 		$result = json_decode(json_encode($xml->Servicos));
@@ -311,6 +335,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return array
 	 */
+
 	protected function transformCorreiosService(array $service) {
 		$error = [];
 
@@ -337,6 +362,7 @@ class Frete implements FreteInterface {
 	 *
 	 * @return string|null
 	 */
+
 	protected function friendlyServiceName($code) {
 		$id = intval($code);
 		$services = [
@@ -362,5 +388,7 @@ class Frete implements FreteInterface {
 		}
 
 		return null;
+		
 	}
+
 }

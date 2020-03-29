@@ -20,6 +20,7 @@ namespace WelltonMiranda\Correios;
  * @see \Barryvdh\Debugbar\LaravelDebugbar
  */
 
+
 class Facade extends \Illuminate\Support\Facades\Facade {
 
 	/**

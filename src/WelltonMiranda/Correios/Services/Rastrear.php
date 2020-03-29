@@ -8,6 +8,7 @@ use WelltonMiranda\Correios\Contracts\RastrearInterface;
 use WelltonMiranda\Correios\WebService;
 
 class Rastrear implements RastrearInterface {
+	
 	/**
 	 * Cliente HTTP
 	 *

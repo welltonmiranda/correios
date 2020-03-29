@@ -7,11 +7,13 @@ use WelltonMiranda\Correios\Contracts\CepInterface;
 use WelltonMiranda\Correios\WebService;
 
 class Cep implements CepInterface {
+
 	/**
 	 * Cliente HTTP
 	 *
 	 * @var \GuzzleHttp\ClientInterface
 	 */
+
 	protected $http;
 
 	/**
@@ -19,6 +21,7 @@ class Cep implements CepInterface {
 	 *
 	 * @var string
 	 */
+
 	protected $cep;
 
 	/**
@@ -26,6 +29,7 @@ class Cep implements CepInterface {
 	 *
 	 * @var string
 	 */
+
 	protected $body;
 
 	/**
@@ -33,6 +37,7 @@ class Cep implements CepInterface {
 	 *
 	 * @var \GuzzleHttp\Psr7\Response
 	 */
+
 	protected $response;
 
 	/**
@@ -40,6 +45,7 @@ class Cep implements CepInterface {
 	 *
 	 * @var array
 	 */
+
 	protected $parsedXML;
 
 	/**
@@ -47,6 +53,7 @@ class Cep implements CepInterface {
 	 *
 	 * @param ClientInterface $http
 	 */
+
 	public function __construct(ClientInterface $http) {
 		$this->http = $http;
 	}
@@ -58,6 +65,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return array
 	 */
+
 	public function find($cep) {
 		$this->setCep($cep)
 			->buildXMLBody()
@@ -78,6 +86,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return self
 	 */
+
 	protected function setCep($cep) {
 		$this->cep = $cep;
 
@@ -89,6 +98,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return self
 	 */
+
 	protected function buildXMLBody() {
 		$cep = preg_replace('/[^0-9]/', null, $this->cep);
 		$this->body = trim('
@@ -114,6 +124,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return self
 	 */
+
 	protected function sendWebServiceRequest() {
 		$this->response = $this->http->post(WebService::SIGEP, [
 			'http_errors' => false,
@@ -132,6 +143,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return self
 	 */
+
 	protected function parseXMLFromResponse() {
 		$xml = $this->response->getBody()->getContents();
 		$parse = simplexml_load_string(str_replace([
@@ -149,6 +161,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return bool
 	 */
+
 	protected function hasErrorMessage() {
 		return array_key_exists('Fault', $this->parsedXML);
 	}
@@ -158,6 +171,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return array
 	 */
+
 	protected function fetchErrorMessage() {
 		return [
 			'error' => $this->messages($this->parsedXML['Fault']['faultstring']),
@@ -171,6 +185,7 @@ class Cep implements CepInterface {
 	 *
 	 * @return string
 	 */
+
 	protected function messages($faultString) {
 		return [
 			'CEP INVÁLIDO' => 'CEP não encontrado',
@@ -184,6 +199,7 @@ class Cep implements CepInterface {
 	 * @param  array  $address
 	 * @return array
 	 */
+
 	protected function getComplement(array $address) {
 		$complement = [];
 
@@ -203,7 +219,9 @@ class Cep implements CepInterface {
 	 *
 	 * @return array
 	 */
+
 	protected function fetchCepAddress() {
+
 		$address = $this->parsedXML['consultaCEPResponse']['return'];
 		$cep = preg_replace('/^([0-9]{5})([0-9]{3})$/', '${1}-${2}', $address['cep']);
 		$complement = $this->getComplement($address);
@@ -216,5 +234,7 @@ class Cep implements CepInterface {
 			'cidade' => cleanString($address['cidade']),
 			'uf' => $address['uf'],
 		];
+
 	}
+
 }

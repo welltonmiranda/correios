@@ -19,5 +19,4 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		});
 
 	}
-
 }
