@@ -2,9 +2,7 @@
 
 namespace WelltonMiranda\Correios;
 
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-
-class ServiceProvider extends BaseServiceProvider {
+class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 	/**
 	 * Register any application services.
@@ -14,7 +12,7 @@ class ServiceProvider extends BaseServiceProvider {
 
 	public function register() {
 
-		$this->app->singleton(Client::class, function () {
+		$this->app->singleton('Correios', function () {
 
 			return Client::class;
 

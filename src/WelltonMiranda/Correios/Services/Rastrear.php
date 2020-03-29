@@ -220,9 +220,29 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function fetchRastrear() {
 
+<<<<<<< Updated upstream
 		$address = $this->parsedXML['consultaCEPResponse']['return'];
 		$cep = preg_replace('/^([0-9]{5})([0-9]{3})$/', '${1}-${2}', $address['cep']);
 		$complement = $this->getComplement($address);
+=======
+		$rastreios = $this->rastreamento;
+
+		$resultado = [];
+
+		foreach ($rastreios as $key => $rastreio):
+
+			$resultado[] = [
+
+				//'data' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['data']))),
+				///'local' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['local']))),
+				//'status' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['status']))),
+				//'encaminhado' => (isset($rastreio['encaminhado']) ? preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['encaminhado']))) : null),
+
+				'data' => cleanString($rastreio['data']),
+				'local' => cleanString($rastreio['local']),
+				'status' => cleanString($rastreio['status']),
+				'encaminhado' => (isset($rastreio['encaminhado']) ? cleanString($rastreio['encaminhado']) : null),
+>>>>>>> Stashed changes
 
 		return [
 			'data' => $this,
