@@ -1,7 +1,7 @@
 {
     "name": "welltonmiranda/correios",
     "description": "Package para pesquisa de serviços de busca por cep, cálculo de frete e etc, diretamente nos serviços dos Correios.",
-    "keywords": ["cep", "brazil", "laravel", "frete"],
+    "keywords": ["cep", "brazil", "laravel", "frete", "correios", "correios-laravel", "calculo"],
     "license": "MIT",
     "authors": [{
         "name": "Wellton J. Miranda",
@@ -13,8 +13,8 @@
         "laravel/framework": "^5.0||^6.0||^7.0"
     },
     "autoload": {
-        "psr-0": {
-            "WelltonMiranda\\Correios": "src/"
+        "psr-4": {
+            "WelltonMiranda\\Correios": "src/WelltonMiranda/Correios"
         }
     },
     "minimum-stability": "dev",
