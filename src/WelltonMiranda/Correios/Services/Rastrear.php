@@ -144,11 +144,11 @@ class Rastrear implements RastrearInterface {
 
 				list($status, $encaminhado) = explode("<br>", phpQuery::pq($tr)->find('td:eq(1)')->html());
 
-				$this->rastreamento[] = ['data' => trim($data) . " " . trim($hora), 'local' => trim($local), 'status' => trim(strip_tags($status))];
+				$this->rastreamento[] = ['data' => $data . " " . $hora, 'local' => $local, 'status' => $status];
 
-				if (trim($encaminhado)):
+				if ($encaminhado):
 
-					$this->rastreamento[count($this->rastreamento) - 1]['encaminhado'] = trim($encaminhado);
+					$this->rastreamento[count($this->rastreamento) - 1]['encaminhado'] = $encaminhado;
 
 				endif;
 
@@ -224,7 +224,6 @@ class Rastrear implements RastrearInterface {
 
 			];
 		endforeach;
-
 
 	}
 }
