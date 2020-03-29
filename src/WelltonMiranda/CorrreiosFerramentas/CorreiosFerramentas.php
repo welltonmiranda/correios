@@ -2,12 +2,14 @@
 
 namespace WelltonMiranda\CorreiosFerramentas;
 
-class Correios extends Http {
+class CorreiosFerramentas extends Http {
 
 	function __construct() {
+
 		$this->url = [
-				'calcularPrecoPrazo' => 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo',
+			'calcularPrecoPrazo' => 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo',
 		];
+
 	}
 
 	/**

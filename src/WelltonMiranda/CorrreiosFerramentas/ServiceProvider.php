@@ -5,14 +5,21 @@ namespace WelltonMiranda\CorreiosFerramentas;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider {
+
 	/**
-	 * Register the CorreiosConsulta class into correios_consulta
+	 * Register any application services.
 	 *
 	 * @return void
 	 */
+
 	public function register() {
+
 		$this->app->singleton('correios_ferramentas', function () {
-			return new \WelltonMiranda\CorreiosFerramentas\Correios;
+
+			return new \WelltonMiranda\CorreiosFerramentas\CorreiosFerramentas;
+
 		});
+
 	}
+
 }
