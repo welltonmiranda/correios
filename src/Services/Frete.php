@@ -5,10 +5,10 @@ namespace WelltonMiranda\Correios\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
-use WelltonMiranda\Correios\Contracts\FreteInterface;
-use WelltonMiranda\Correios\PackageType;
-use WelltonMiranda\Correios\Service;
-use WelltonMiranda\Correios\WebService;
+use Contracts\FreteInterface;
+use PackageType;
+use Service;
+use WebService;
 
 class Frete implements FreteInterface {
 

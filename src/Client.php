@@ -4,32 +4,32 @@ namespace WelltonMiranda\Correios;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\ClientInterface;
-use WelltonMiranda\Correios\Contracts\CepInterface;
-use WelltonMiranda\Correios\Contracts\FreteInterface;
-use WelltonMiranda\Correios\Services\Cep;
-use WelltonMiranda\Correios\Services\Frete;
-use WelltonMiranda\Correios\Services\Rastrear;
+use Contracts\CepInterface;
+use Contracts\FreteInterface;
+use Services\Cep;
+use Services\Frete;
+use Services\Rastrear;
 
 class Client {
 
 	/**
 	 * Serviço de frete.
 	 *
-	 * @var \WelltonMiranda\Correios\Contracts\FreteInterface
+	 * @var \Contracts\FreteInterface
 	 */
 	protected $frete;
 
 	/**
 	 * Serviço de CEP.
 	 *
-	 * @var \WelltonMiranda\Correios\Contracts\CepInterface
+	 * @var \Contracts\CepInterface
 	 */
 	protected $cep;
 
 	/**
 	 * Serviço de Rastreio.
 	 *
-	 * @var \WelltonMiranda\Correios\Contracts\RastrearInterface
+	 * @var \Contracts\RastrearInterface
 	 */
 	protected $rastrear;
 
@@ -37,8 +37,8 @@ class Client {
 	 * Cria uma nova instância da classe Client.
 	 *
 	 * @param \GuzzleHttp\ClientInterface|null  $http
-	 * @param \WelltonMiranda\Correios\Contracts\FreteInterface|null $frete
-	 * @param \WelltonMiranda\Correios\Contracts\CepInterface|null $cep
+	 * @param \Contracts\FreteInterface|null $frete
+	 * @param \Contracts\CepInterface|null $cep
 	 */
 	public function __construct(
 		ClientInterface $http = null,
@@ -55,7 +55,7 @@ class Client {
 	/**
 	 * Serviço de frete dos Correios.
 	 *
-	 * @return \WelltonMiranda\Correios\Contracts\FreteInterface
+	 * @return \Contracts\FreteInterface
 	 */
 	public function frete() {
 		return $this->frete;
@@ -64,7 +64,7 @@ class Client {
 	/**
 	 * Serviço de CEP dos Correios.
 	 *
-	 * @return \WelltonMiranda\Correios\Contracts\CepInterface
+	 * @return \Contracts\CepInterface
 	 */
 	public function cep() {
 		return $this->cep;
@@ -73,7 +73,7 @@ class Client {
 	/**
 	 * Serviço de Rastreio dos Correios.
 	 *
-	 * @return \WelltonMiranda\Correios\Contracts\CepInterface
+	 * @return \Contracts\CepInterface
 	 */
 	public function rastrear() {
 		return $this->rastrear;
