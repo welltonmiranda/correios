@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider {
 
 	public function register() {
 
-		$this->app->singleton('correios', function () {
+		$this->app->singleton('client', function () {
 
 			return new \WelltonMiranda\Correios\Client;
 
