@@ -91,8 +91,11 @@ class Rastrear implements RastrearInterface {
 	 * @return self
 	 */
 	protected function buildFormBody() {
-		$codigo = $this->codigo;
-		$this->body = ['Objetos' => $codigo];
+
+		$codigo = preg_replace('/[^0-9]/', null, $this->codigo);
+		$this->body = [
+			'Objetos' => $codigo,
+		];
 
 		return $this;
 	}
@@ -229,15 +232,19 @@ class Rastrear implements RastrearInterface {
 
 			$resultado[] = [
 
-				'data' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['data']))),
-				'local' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['local']))),
-				'status' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['status']))),
-				'encaminhado' => (isset($rastreio['encaminhado']) ? preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['encaminhado']))) : null),
+				//'data' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['data']))),
+				///'local' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['local']))),
+				//'status' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['status']))),
+				//'encaminhado' => (isset($rastreio['encaminhado']) ? preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['encaminhado']))) : null),
+
+				'data' => cleanString($rastreio['data']),
+				'local' => cleanString($rastreio['local']),
+				'status' => cleanString($rastreio['status']),
+				'encaminhado' => (isset($rastreio['encaminhado']) ? cleanString($rastreio['encaminhado']) : null),
 
 			];
-
 		endforeach;
 
-		return $resultado;
+
 	}
 }

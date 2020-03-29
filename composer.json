@@ -16,7 +16,10 @@
     "autoload": {
         "psr-4": {
             "WelltonMiranda\\Correios\\": "src/WelltonMiranda/Correios/"
-        }
+        },
+        "files": [
+            "src/Helpers.php"
+        ]
     },
     "minimum-stability": "dev",
     "extra": {
