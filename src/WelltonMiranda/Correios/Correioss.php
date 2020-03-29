@@ -2,7 +2,7 @@
 
 namespace WelltonMiranda\Correios;
 
-class CorreiosFerramentas extends Http {
+class Correios extends Http {
 
 	function __construct() {
 
