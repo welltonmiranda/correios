@@ -211,7 +211,7 @@ class Cep implements CepInterface {
 			$complement[] = $address['complemento2'];
 		}
 
-		return implode(',', $complement);
+		return implode(', ', $complement);
 	}
 
 	/**

@@ -109,7 +109,7 @@ interface FreteInterface {
 	 *
 	 * @return array
 	 */
-	
+
 	public function calculate();
 
 }

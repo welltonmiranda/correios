@@ -2,24 +2,23 @@
 
 namespace WelltonMiranda\Correios;
 
-abstract class PackageType
-{
-    /**
-     * Formatos caixa ou pacote.
-     */
-    
-    const BOX = 1;
+abstract class PackageType {
+	/**
+	 * Formatos caixa ou pacote.
+	 */
 
-    /**
-     * Formatos rolo ou prisma.
-     */
+	const BOX = 1;
 
-    const ROLL = 2;
+	/**
+	 * Formatos rolo ou prisma.
+	 */
 
-    /**
-     * Formato envelope.
-     */
+	const ROLL = 2;
 
-    const ENVELOPE = 3;
+	/**
+	 * Formato envelope.
+	 */
+
+	const ENVELOPE = 3;
 
 }

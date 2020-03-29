@@ -3,7 +3,7 @@
 namespace WelltonMiranda\Correios\Contracts;
 
 interface RastrearInterface {
-	
+
 	/**
 	 * Encontrar endereço por CEP.
 	 *
