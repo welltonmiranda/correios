@@ -156,7 +156,7 @@ class Rastrear implements RastrearInterface {
 			return false;
 		}
 
-		return $this;
+		return $rastreamento;
 	}
 
 	/**
