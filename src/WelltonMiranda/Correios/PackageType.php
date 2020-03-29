@@ -1,6 +1,6 @@
 <?php
 
-namespace Welltonmiranda\Correios;
+namespace WelltonMiranda\Correios;
 
 abstract class PackageType
 {
