@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "WelltonMiranda\\Correios\\": "src/"
+            "WelltonMiranda\\Correios\\": "src/WelltonMiranda/Correios/"
         }
     },
     "minimum-stability": "dev",
