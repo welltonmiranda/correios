@@ -198,26 +198,6 @@ class Rastrear implements RastrearInterface {
 	}
 
 	/**
-	 * Retorna complemento de um endereço.
-	 *
-	 * @param  array  $address
-	 * @return array
-	 */
-	protected function getComplement(array $address) {
-		$complement = [];
-
-		if (array_key_exists('complemento', $address)) {
-			$complement[] = $address['complemento'];
-		}
-
-		if (array_key_exists('complemento2', $address)) {
-			$complement[] = $address['complemento2'];
-		}
-
-		return $complement;
-	}
-
-	/**
 	 * Recupera endereço do XML de resposta.
 	 *
 	 * @return array
