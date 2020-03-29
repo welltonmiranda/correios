@@ -22,10 +22,6 @@ class Correios extends Http {
 
 		return $this->get($this->url['calcularPrecoPrazo']);
 
-		//return [
-		//	'cep' => $cep,
-		//];
-
 	}
 
 }
