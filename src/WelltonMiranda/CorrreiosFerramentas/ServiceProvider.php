@@ -12,7 +12,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register() {
 		$this->app->singleton('correios_ferramentas', function () {
-			return new \Cagartner\CorreiosConsulta\CorreiosConsulta;
+			return new \WelltonMiranda\CorreiosFerramentas\Correios;
 		});
 	}
 }
