@@ -128,7 +128,7 @@ class Rastrear implements RastrearInterface {
 
 		phpQuery::newDocumentHTML($html, $charset = 'utf-8');
 
-		$rastreamento = [];
+		$this->rastreamento = [];
 
 		$c = 0;
 
@@ -142,11 +142,11 @@ class Rastrear implements RastrearInterface {
 
 				list($status, $encaminhado) = explode("<br>", phpQuery::pq($tr)->find('td:eq(1)')->html());
 
-				$rastreamento[] = ['data' => trim($data) . " " . trim($hora), 'local' => trim($local), 'status' => trim(strip_tags($status))];
+				$this->rastreamento[] = ['data' => trim($data) . " " . trim($hora), 'local' => trim($local), 'status' => trim(strip_tags($status))];
 
 				if (trim($encaminhado)):
 
-					$rastreamento[count($rastreamento) - 1]['encaminhado'] = trim($encaminhado);
+					$this->rastreamento[count($this->rastreamento) - 1]['encaminhado'] = trim($encaminhado);
 
 				endif;
 
@@ -154,7 +154,7 @@ class Rastrear implements RastrearInterface {
 
 		endforeach;
 
-		if (!count($rastreamento)) {
+		if (!count($this->rastreamento)) {
 			return false;
 		}
 
@@ -193,26 +193,6 @@ class Rastrear implements RastrearInterface {
 		return [
 			'CEP INVÁLIDO' => 'CEP não encontrado',
 		][$faultString];
-	}
-
-	/**
-	 * Retorna complemento de um endereço.
-	 *
-	 * @param  array  $address
-	 * @return array
-	 */
-	protected function getComplement(array $address) {
-		$complement = [];
-
-		if (array_key_exists('complemento', $address)) {
-			$complement[] = $address['complemento'];
-		}
-
-		if (array_key_exists('complemento2', $address)) {
-			$complement[] = $address['complemento2'];
-		}
-
-		return $complement;
 	}
 
 	/**
