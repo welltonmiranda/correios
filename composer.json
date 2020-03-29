@@ -10,12 +10,12 @@
     "require": {
         "php": ">=7.0.0",
         "guzzlehttp/guzzle": ">=6.3",
-        "laravel/framework": "^5.0||^6.0||^7.0",
+        "laravel/framework": "^7.0",
         "cagartner/phpquery": "0.9.8"
     },
     "autoload": {
         "psr-4": {
-            "WelltonMiranda\\Correios\\": "src/"
+            "WelltonMiranda\\Correios\\": "src/WelltonMiranda/Correios/"
         },
         "files": [
             "src/WelltonMiranda/Correios/Helpers.php"

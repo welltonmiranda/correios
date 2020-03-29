@@ -12,7 +12,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 	public function register() {
 
-		$this->app->singleton(Client::class, function () {
+		$this->app->singleton('welltonmiranda_correios', function () {
 
 			return Client::class;
 
