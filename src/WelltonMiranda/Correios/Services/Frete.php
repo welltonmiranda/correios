@@ -2,12 +2,13 @@
 
 namespace WelltonMiranda\Correios\Services;
 
-use WelltonMiranda\Correios\PackageType;
-use WelltonMiranda\Correios\Service;
-use WelltonMiranda\Correios\WebService;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
+use WelltonMiranda\Correios\Contracts\FreteInterface;
+use WelltonMiranda\Correios\PackageType;
+use WelltonMiranda\Correios\Service;
+use WelltonMiranda\Correios\WebService;
 
 class Frete implements FreteInterface {
 	/**
@@ -315,17 +316,17 @@ class Frete implements FreteInterface {
 
 		if ($service['Erro'] != 0) {
 			$error = [
-				'code' => $service['Erro'],
-				'message' => $service['MsgErro'],
+				'codigo' => $service['Erro'],
+				'mensagem' => $service['MsgErro'],
 			];
 		}
 
 		return [
-			'name' => $this->friendlyServiceName($service['Codigo']),
-			'code' => $service['Codigo'],
-			'price' => floatval(str_replace(',', '.', $service['Valor'])),
-			'deadline' => intval($service['PrazoEntrega']),
-			'error' => $error,
+			'tipo' => $this->friendlyServiceName($service['Codigo']),
+			'codigo' => $service['Codigo'],
+			'valor' => floatval(str_replace(',', '.', $service['Valor'])),
+			'prazo_entrega' => intval($service['PrazoEntrega']),
+			'erro' => $error,
 		];
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Welltonmiranda\Correios\Contracts;
+namespace WelltonMiranda\Correios\Contracts;
 
 interface FreteInterface {
 	/**

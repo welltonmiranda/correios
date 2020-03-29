@@ -14,7 +14,7 @@ class Facade extends BaseFacade {
 
 	protected static function getFacadeAccessor() {
 
-		return 'correios';
+		return 'welltonmiranda_correios';
 
 	}
 
