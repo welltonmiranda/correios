@@ -1,6 +1,6 @@
 <?php
 
-namespace WelltonMiranda\Correios\Facades;
+namespace WelltonMiranda\Correios;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 
