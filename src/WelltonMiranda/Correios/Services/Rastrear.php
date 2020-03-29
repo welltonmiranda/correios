@@ -4,6 +4,7 @@ namespace WelltonMiranda\Correios\Services;
 
 use GuzzleHttp\ClientInterface;
 use PhpQuery\PhpQuery as phpQuery;
+use WelltonMiranda\Correios\Contracts\RastrearInterface;
 use WelltonMiranda\Correios\WebService;
 
 class Rastrear implements RastrearInterface {
@@ -15,7 +16,7 @@ class Rastrear implements RastrearInterface {
 	protected $http;
 
 	/**
-	 * CEP
+	 * Código
 	 *
 	 * @var string
 	 */
@@ -36,14 +37,14 @@ class Rastrear implements RastrearInterface {
 	protected $response;
 
 	/**
-	 * XML de resposta formatado.
+	 * Array de resposta formatado.
 	 *
 	 * @var array
 	 */
-	protected $parsedXML;
+	protected $rastreamento;
 
 	/**
-	 * Cria uma nova instância da classe Cep.
+	 * Cria uma nova instância da classe Rastrear.
 	 *
 	 * @param ClientInterface $http
 	 */
@@ -59,14 +60,14 @@ class Rastrear implements RastrearInterface {
 	 * @return array
 	 */
 	public function find($codigo) {
-		$this->setCodigo($cep)
+		$this->setCodigo($codigo)
 			->buildFormBody()
 			->sendWebServiceRequest()
 			->parseHTMLFromResponse();
 
-		if ($this->hasErrorMessage()) {
-			return $this->fetchErrorMessage();
-		}
+		////if ($this->hasErrorMessage()) {
+		//	return $this->fetchErrorMessage();
+		///}
 
 		return $this->fetchRastrear();
 	}
@@ -90,7 +91,7 @@ class Rastrear implements RastrearInterface {
 	 * @return self
 	 */
 	protected function buildFormBody() {
-		$codigo = preg_replace('/[^0-9]/', null, $this->codigo);
+		$codigo = $this->codigo;
 		$this->body = ['Objetos' => $codigo];
 
 		return $this;
@@ -105,7 +106,7 @@ class Rastrear implements RastrearInterface {
 	protected function sendWebServiceRequest() {
 		$this->response = $this->http->post(WebService::RASTREAR, [
 			'http_errors' => false,
-			'body' => $this->body,
+			'form_params' => $this->body,
 			'headers' => [
 				'Content-Type' => 'application/x-www-form-urlencoded',
 				'cache-control' => 'no-cache',
@@ -126,7 +127,7 @@ class Rastrear implements RastrearInterface {
 
 		phpQuery::newDocumentHTML($html, $charset = 'utf-8');
 
-		$rastreamento = [];
+		$this->rastreamento = [];
 
 		$c = 0;
 
@@ -140,11 +141,11 @@ class Rastrear implements RastrearInterface {
 
 				list($status, $encaminhado) = explode("<br>", phpQuery::pq($tr)->find('td:eq(1)')->html());
 
-				$rastreamento[] = ['data' => trim($data) . " " . trim($hora), 'local' => trim($local), 'status' => trim(strip_tags($status))];
+				$this->rastreamento[] = ['data' => trim($data) . " " . trim($hora), 'local' => trim($local), 'status' => trim(strip_tags($status))];
 
 				if (trim($encaminhado)):
 
-					$rastreamento[count($rastreamento) - 1]['encaminhado'] = trim($encaminhado);
+					$this->rastreamento[count($this->rastreamento) - 1]['encaminhado'] = trim($encaminhado);
 
 				endif;
 
@@ -152,11 +153,11 @@ class Rastrear implements RastrearInterface {
 
 		endforeach;
 
-		if (!count($rastreamento)) {
+		if (!count($this->rastreamento)) {
 			return false;
 		}
 
-		return $rastreamento;
+		return $this;
 	}
 
 	/**
@@ -220,17 +221,7 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function fetchRastrear() {
 
-		$address = $this->parsedXML['consultaCEPResponse']['return'];
-		$cep = preg_replace('/^([0-9]{5})([0-9]{3})$/', '${1}-${2}', $address['cep']);
-		$complement = $this->getComplement($address);
-
-		return [
-			'data' => $this,
-			'rua' => $address['end'],
-			'complemento' => $complement,
-			'bairro' => $address['bairro'],
-			'cidade' => $address['cidade'],
-			'uf' => $address['uf'],
-		];
+	
+		return $this->rastreamento;
 	}
 }
