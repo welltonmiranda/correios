@@ -93,7 +93,7 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function buildFormBody() {
 
-		$codigo = preg_replace('/[^0-9]/', null, $this->codigo);
+		$codigo = $this->codigo;
 		$this->body = [
 			'objetos' => $codigo,
 		];
