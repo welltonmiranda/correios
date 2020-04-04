@@ -95,7 +95,7 @@ class Rastrear implements RastrearInterface {
 
 		$codigo = preg_replace('/[^0-9]/', null, $this->codigo);
 		$this->body = [
-			'Objetos' => $codigo,
+			'objetos' => $codigo,
 		];
 
 		return $this;
@@ -108,12 +108,13 @@ class Rastrear implements RastrearInterface {
 	 * @return self
 	 */
 	protected function sendWebServiceRequest() {
+
 		$this->response = $this->http->post(WebService::RASTREAR, [
 			'http_errors' => false,
 			'form_params' => $this->body,
 			'headers' => [
 				'Content-Type' => 'application/x-www-form-urlencoded',
-				'cache-control' => 'no-cache',
+				'Cache-Control' => 'no-cache',
 			],
 		]);
 
@@ -213,11 +214,6 @@ class Rastrear implements RastrearInterface {
 
 			$resultado[] = [
 
-				//'data' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['data']))),
-				///'local' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['local']))),
-				//'status' => preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['status']))),
-				//'encaminhado' => (isset($rastreio['encaminhado']) ? preg_replace('/(\v|\s)+/', ' ', stripslashes(strip_tags($rastreio['encaminhado']))) : null),
-
 				'data' => cleanString($rastreio['data']),
 				'local' => cleanString($rastreio['local']),
 				'status' => cleanString($rastreio['status']),
@@ -225,6 +221,8 @@ class Rastrear implements RastrearInterface {
 
 			];
 		endforeach;
+
+		return $resultado;
 
 	}
 }
