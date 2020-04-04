@@ -16,6 +16,6 @@ abstract class WebService {
 	/**
 	 * URL do webservice dos Correios para rastreito de objetos.
 	 */
-	const RASTREAR = 'https://www2.correios.com.br/sistemas/rastreamento/resultado.cfm';
+	const RASTREAR = 'https://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm';
 
 }
