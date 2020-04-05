@@ -45,6 +45,13 @@ class Rastrear implements RastrearInterface {
 	protected $rastreamento;
 
 	/**
+	 * Array de resposta formatado.
+	 *
+	 * @var array
+	 */
+	protected $errors;
+
+	/**
 	 * Cria uma nova instância da classe Rastrear.
 	 *
 	 * @param ClientInterface $http
@@ -66,9 +73,9 @@ class Rastrear implements RastrearInterface {
 			->sendWebServiceRequest()
 			->parseHTMLFromResponse();
 
-		////if ($this->hasErrorMessage()) {
-		//	return $this->fetchErrorMessage();
-		///}
+		if ($this->hasErrorMessage()) {
+			return $this->fetchErrorMessage();
+		}
 
 		return $this->fetchRastrear();
 	}
@@ -132,9 +139,9 @@ class Rastrear implements RastrearInterface {
 
 		phpQuery::newDocumentHTML($html, $charset = 'utf-8');
 
-		$this->rastreamento = [];
-
 		$c = 0;
+
+		$this->rastreamento = [];
 
 		foreach (phpQuery::pq('tr') as $tr):
 
@@ -158,45 +165,42 @@ class Rastrear implements RastrearInterface {
 
 		endforeach;
 
-		if (!count($this->rastreamento)) {
-			return false;
+		if (!isset($this->rastreamento)) {
+			return null;
 		}
 
 		return $this;
 	}
 
-	/**
-	 * Verifica se existe alguma mensagem de
-	 * erro no XML retornado da requisição.
-	 *
-	 * @return bool
-	 */
 	protected function hasErrorMessage() {
-		return array_key_exists('Fault', $this->parsedXML);
+
+		$statusCode = $this->response->getStatusCode();
+
+		if ($statusCode = !200):
+
+			return true;
+
+		else:
+
+			return false;
+
+		endif;
+
 	}
 
-	/**
-	 * Recupera mensagem de erro do XML formatada.
-	 *
-	 * @return array
-	 */
 	protected function fetchErrorMessage() {
+
 		return [
-			'error' => $this->messages($this->parsedXML['Fault']['faultstring']),
+			'error' => $this->messages($this->response->getStatusCode()),
 		];
+
 	}
 
-	/**
-	 * Mensagens de erro mais legíveis.
-	 *
-	 * @param  string $faultString
-	 *
-	 * @return string
-	 */
-	protected function messages($faultString) {
-		return [
-			'CEP INVÁLIDO' => 'CEP não encontrado',
-		][$faultString];
+	protected function messages($statusCode) {
+
+		$codigo[503] = 'Serviço indisponível no momento, por favor, tente novamente mais tarde.';
+
+		return $codigo[$statusCode];
 	}
 
 	/**
@@ -206,11 +210,9 @@ class Rastrear implements RastrearInterface {
 	 */
 	protected function fetchRastrear() {
 
-		$rastreios = $this->rastreamento;
-
 		$resultado = [];
 
-		foreach ($rastreios as $key => $rastreio):
+		foreach ($this->rastreamento as $key => $rastreio):
 
 			$resultado[] = [
 
